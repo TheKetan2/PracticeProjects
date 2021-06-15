@@ -46,7 +46,7 @@ class _DicePageState extends State<DicePage> {
                 onTap: () => {
                   setState(
                     () {
-                      diceOne = _random.nextInt(5) + 1;
+                      diceOne = _random.nextInt(6) + 1;
                     },
                   )
                 },
@@ -65,7 +65,7 @@ class _DicePageState extends State<DicePage> {
                 onTap: () => {
                   setState(
                     () {
-                      diceTwo = _random.nextInt(5) + 1;
+                      diceTwo = _random.nextInt(6) + 1;
                     },
                   )
                 },
