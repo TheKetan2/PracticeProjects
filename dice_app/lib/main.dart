@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +14,8 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.red,
         appBar: AppBar(
-          title: Text("Dice App"),
+          title: Text("Dice Appp"),
+          backgroundColor: Colors.red,
         ),
         body: DicePage(),
       ),
@@ -20,9 +23,59 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
+  @override
+  _DicePageState createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  var _random = new Random();
+  int diceOne = 1, diceTwo = 1;
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Row(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () => {
+                setState(
+                  () {
+                    diceOne = _random.nextInt(5) + 1;
+                  },
+                )
+              },
+              child: Container(
+                child: Image(
+                  image: AssetImage(
+                    "img/dice$diceOne.png",
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: GestureDetector(
+              onTap: () => {
+                setState(
+                  () {
+                    diceTwo = _random.nextInt(5) + 1;
+                  },
+                )
+              },
+              child: Container(
+                child: Image(
+                  image: AssetImage(
+                    "img/dice$diceTwo.png",
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
