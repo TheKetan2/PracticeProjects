@@ -35,46 +35,51 @@ class _DicePageState extends State<DicePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () => {
-                setState(
-                  () {
-                    diceOne = _random.nextInt(5) + 1;
-                  },
-                )
-              },
-              child: Container(
-                child: Image(
-                  image: AssetImage(
-                    "img/dice$diceOne.png",
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 10.0,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () => {
+                  setState(
+                    () {
+                      diceOne = _random.nextInt(5) + 1;
+                    },
+                  )
+                },
+                child: Container(
+                  child: Image(
+                    image: AssetImage(
+                      "img/dice$diceOne.png",
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(width: 10),
-          Expanded(
-            child: GestureDetector(
-              onTap: () => {
-                setState(
-                  () {
-                    diceTwo = _random.nextInt(5) + 1;
-                  },
-                )
-              },
-              child: Container(
-                child: Image(
-                  image: AssetImage(
-                    "img/dice$diceTwo.png",
+            SizedBox(width: 10),
+            Expanded(
+              child: GestureDetector(
+                onTap: () => {
+                  setState(
+                    () {
+                      diceTwo = _random.nextInt(5) + 1;
+                    },
+                  )
+                },
+                child: Container(
+                  child: Image(
+                    image: AssetImage(
+                      "img/dice$diceTwo.png",
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
