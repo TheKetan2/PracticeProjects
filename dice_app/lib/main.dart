@@ -50,12 +50,8 @@ class _DicePageState extends State<DicePage> {
                     },
                   )
                 },
-                child: Container(
-                  child: Image(
-                    image: AssetImage(
-                      "img/dice$diceOne.png",
-                    ),
-                  ),
+                child: Image.asset(
+                  "img/dice$diceOne.png",
                 ),
               ),
             ),
@@ -69,12 +65,8 @@ class _DicePageState extends State<DicePage> {
                     },
                   )
                 },
-                child: Container(
-                  child: Image(
-                    image: AssetImage(
-                      "img/dice$diceTwo.png",
-                    ),
-                  ),
+                child: Image.asset(
+                  "img/dice$diceTwo.png",
                 ),
               ),
             ),
