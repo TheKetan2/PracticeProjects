@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -25,16 +26,18 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [
-    Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    )
+  List<Icon> scoreKeeper = [];
+  List<Question> questions = [
+    Question(q: "You are a human", a: true),
+    Question(q: "You are a doggo", a: false),
+    Question(q: "You can lead a cow down stairs but not up stairs.", a: false),
+    Question(
+        q: "Approximately one quarter of human bones are in the feet.",
+        a: true),
+    Question(q: "A slug\'s blood is green.", a: true),
   ];
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -47,7 +50,9 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                index < questions.length
+                    ? questions[index].questionText
+                    : "Game Over",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -70,15 +75,28 @@ class _QuizPageState extends State<QuizPage> {
                   fontSize: 20.0,
                 ),
               ),
-              onPressed: () {
-                //The user picked true.
-                setState(() {
-                  scoreKeeper.add(Icon(
-                    Icons.check,
-                    color: Colors.green,
-                  ));
-                });
-              },
+              onPressed: index >= questions.length
+                  ? null
+                  : () {
+                      //The user picked false.
+                      if (questions[index].questionAns == true) {
+                        setState(() {
+                          scoreKeeper.add(Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ));
+                          index += 1;
+                        });
+                      } else if (index < questions.length) {
+                        setState(() {
+                          scoreKeeper.add(Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ));
+                          index += 1;
+                        });
+                      }
+                    },
             ),
           ),
         ),
@@ -94,18 +112,32 @@ class _QuizPageState extends State<QuizPage> {
                   color: Colors.white,
                 ),
               ),
-              onPressed: () {
-                //The user picked false.
-                setState(() {
-                  scoreKeeper.add(Icon(
-                    Icons.close,
-                    color: Colors.red,
-                  ));
-                });
-              },
+              onPressed: index >= questions.length
+                  ? null
+                  : () {
+                      //The user picked false.
+                      if (questions[index].questionAns == false) {
+                        setState(() {
+                          scoreKeeper.add(Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ));
+                          index += 1;
+                        });
+                      } else if (index < questions.length) {
+                        setState(() {
+                          scoreKeeper.add(Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ));
+                          index += 1;
+                        });
+                      }
+                    },
             ),
           ),
         ),
+
         //TODO: Add a Row here as your score keeper
         Row(
           children: scoreKeeper,
