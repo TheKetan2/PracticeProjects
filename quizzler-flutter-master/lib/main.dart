@@ -40,110 +40,143 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          flex: 5,
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Center(
-              child: Text(
-                index < questions.length
-                    ? questions[index].questionText
-                    : "Game Over",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
+    return index >= questions.length
+        ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Geme Over!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              textColor: Colors.white,
-              color: Colors.green,
-              child: Text(
-                'True',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
-              ),
-              onPressed: index >= questions.length
-                  ? null
-                  : () {
+                Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: FlatButton(
+                    textColor: Colors.white,
+                    color: Colors.green,
+                    child: Text(
+                      'Restart',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    onPressed: () {
                       //The user picked false.
-                      if (questions[index].questionAns == true) {
-                        setState(() {
-                          scoreKeeper.add(Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ));
-                          index += 1;
-                        });
-                      } else if (index < questions.length) {
-                        setState(() {
-                          scoreKeeper.add(Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          ));
-                          index += 1;
-                        });
-                      }
+                      setState(() {
+                        index = 0;
+                        scoreKeeper = [];
+                      });
                     },
+                  ),
+                )
+              ],
             ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              color: Colors.red,
-              child: Text(
-                'False',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                flex: 5,
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      questions[index].questionText,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              onPressed: index >= questions.length
-                  ? null
-                  : () {
-                      //The user picked false.
-                      if (questions[index].questionAns == false) {
-                        setState(() {
-                          scoreKeeper.add(Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ));
-                          index += 1;
-                        });
-                      } else if (index < questions.length) {
-                        setState(() {
-                          scoreKeeper.add(Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          ));
-                          index += 1;
-                        });
-                      }
-                    },
-            ),
-          ),
-        ),
-
-        //TODO: Add a Row here as your score keeper
-        Row(
-          children: scoreKeeper,
-        )
-      ],
-    );
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: FlatButton(
+                    textColor: Colors.white,
+                    color: Colors.green,
+                    child: Text(
+                      'True',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    onPressed: index >= questions.length
+                        ? null
+                        : () {
+                            //The user picked false.
+                            if (questions[index].questionAns == true) {
+                              setState(() {
+                                scoreKeeper.add(Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                ));
+                                index += 1;
+                              });
+                            } else if (index < questions.length) {
+                              setState(() {
+                                scoreKeeper.add(Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                ));
+                                index += 1;
+                              });
+                            }
+                          },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: FlatButton(
+                    color: Colors.red,
+                    child: Text(
+                      'False',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: index >= questions.length
+                        ? null
+                        : () {
+                            //The user picked false.
+                            if (questions[index].questionAns == false) {
+                              setState(() {
+                                scoreKeeper.add(Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                ));
+                                index += 1;
+                              });
+                            } else if (index < questions.length) {
+                              setState(() {
+                                scoreKeeper.add(Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                ));
+                                index += 1;
+                              });
+                            }
+                          },
+                  ),
+                ),
+              ),
+              Row(
+                children: scoreKeeper,
+              )
+            ],
+          );
   }
 }
 
