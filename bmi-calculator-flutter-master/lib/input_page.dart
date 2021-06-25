@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'result_page.dart';
 
 const double btmContainerHeight = 80.0;
 const Color bottomPinkColor = Color(0xffeb1555);
@@ -12,7 +13,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  int height = 80, age = 15, weight = 100;
+  int height = 80, age = 15, weight = 80;
   bool male = true, female = false;
 
   @override
@@ -85,7 +86,7 @@ class _InputPageState extends State<InputPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  weight.toString(),
+                  height.toString() + " cm",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40.0,
@@ -93,13 +94,12 @@ class _InputPageState extends State<InputPage> {
                 ),
                 Slider(
                   activeColor: Colors.pink,
-                  inactiveColor: Colors.pinkAccent,
-                  value: weight.toDouble(),
+                  value: height.toDouble(),
                   min: 0.0,
                   max: 200.0,
                   onChanged: (value) {
                     setState(() {
-                      weight = value.toInt();
+                      height = value.toInt();
                     });
                   },
                 ),
@@ -115,7 +115,7 @@ class _InputPageState extends State<InputPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "HEIGHT",
+                        "WEIGHT",
                         style: TextStyle(
                           color: Colors.grey,
                         ),
@@ -124,7 +124,7 @@ class _InputPageState extends State<InputPage> {
                         height: 10.0,
                       ),
                       Text(
-                        height.toString(),
+                        weight.toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 40.0,
@@ -140,7 +140,7 @@ class _InputPageState extends State<InputPage> {
                             icon: Icon(FontAwesomeIcons.minus),
                             onPress: () {
                               setState(() {
-                                height--;
+                                weight--;
                               });
                             },
                           ),
@@ -153,7 +153,7 @@ class _InputPageState extends State<InputPage> {
                             ),
                             onPress: () {
                               setState(() {
-                                height++;
+                                weight++;
                               });
                             },
                           ),
@@ -220,7 +220,24 @@ class _InputPageState extends State<InputPage> {
           ),
           GestureDetector(
             onTap: () {
-              print(age + height);
+              double bmi = weight / ((height / 100) * (height / 100));
+              String status = "Healthy";
+              if (bmi < 18.5) {
+                status = "Underweight";
+              } else if (bmi > 25) {
+                status = "Overweight";
+              } else {
+                status = "Healthy";
+              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultPage(
+                    result: bmi.toInt(),
+                    health: status,
+                  ),
+                ),
+              );
             },
             child: Container(
               color: bottomPinkColor,
