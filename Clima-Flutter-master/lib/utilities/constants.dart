@@ -34,3 +34,20 @@ const kInputDecoration = InputDecoration(
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
       borderSide: BorderSide.none,
     ));
+
+const InputDecoration inputDecoration = InputDecoration(
+  hintText: "Enter City Name",
+  hintStyle: TextStyle(color: Colors.grey),
+  filled: true,
+  fillColor: Colors.white,
+  border: OutlineInputBorder(
+    borderSide: BorderSide.none,
+    borderRadius: BorderRadius.all(
+      Radius.circular(10.0),
+    ),
+  ),
+  icon: Icon(
+    Icons.location_city,
+    color: Colors.white,
+  ),
+);
