@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
-    LocationDetails(),
+    HomeScreen(),
     Text(
       'Index 1: Business',
       style: optionStyle,
