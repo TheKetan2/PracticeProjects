@@ -1,6 +1,7 @@
 import 'package:fireside_chat_app/screens/login_screen.dart';
 import 'package:fireside_chat_app/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String id = "welcome_screen";
@@ -52,14 +53,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   tag: "logo",
                   child: Container(
                     child: Image.asset('images/logo.png'),
-                    height: (controller.value * 100),
+                    height: 60,
                   ),
                 ),
-                Text(
-                  'Flash Chat',
-                  style: TextStyle(
+                DefaultTextStyle(
+                  style: const TextStyle(
                     fontSize: 45.0,
                     fontWeight: FontWeight.w900,
+                  ),
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText('Flash Chat'),
+                    ],
+                    onTap: () {
+                      print("Tap Event");
+                    },
                   ),
                 ),
               ],
